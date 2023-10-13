@@ -2,20 +2,20 @@ version: '3.3'
 
 services:
   postgres:
-    image: postgres:15
+    image: "postgres:${POSTGRES_VERSION}"
     environment:
-      - POSTGRES_DB=proyecto1
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=1178ab
+      - POSTGRES_DB="${POSTGRES_DB}"
+      - POSTGRES_USER="${POSTGRES_USER}"
+      - POSTGRES_PASSWORD="${POSTGRES_PASSWORD}"
     ports:
       - '5432:5432'
     volumes:
       - ./src/database/postgres_data:/var/lib/postgresql/data
 
   pgadmin:
-    image: dpage/pgadmin4
+    image: "${PGADMIN_IMAGE}"
     environment:
-      - PGADMIN_DEFAULT_EMAIL=root@admin.com
-      - PGADMIN_DEFAULT_PASSWORD=1178ab
+      - PGADMIN_DEFAULT_EMAIL="${PGADMIN_EMAIL}"
+      - PGADMIN_DEFAULT_PASSWORD="${PGADMIN_PASSWORD}"
     ports:
       - '5050:80'
