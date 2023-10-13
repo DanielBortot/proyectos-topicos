@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  useEffect(()=> {
+    (async function () {
+      const h = await (await fetch('/prueba/saludo')).text();
+      console.log(h);
+    })();
+  })
+
   return (
     <div className="App">
       <header className="App-header">
