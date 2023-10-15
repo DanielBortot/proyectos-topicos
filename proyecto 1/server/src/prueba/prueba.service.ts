@@ -9,7 +9,7 @@ export class PruebaService {
     async prueba() {
         const queryRunner = this.dataSource.createQueryRunner();
         await queryRunner.connect();
-        const h = await queryRunner.query('SELECT saludo()')
+        const h = await queryRunner.query('SELECT * FROM saludo()')
         await queryRunner.release();
         console.log(h);
         return h;
