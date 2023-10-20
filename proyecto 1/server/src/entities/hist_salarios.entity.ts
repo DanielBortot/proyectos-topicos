@@ -1,4 +1,4 @@
-import { Check, Column, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Check, Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
 import { Empleado } from "./empleado.entity";
 
 @Entity('Hist_Salarios')
@@ -19,7 +19,7 @@ export class Hist_Salarios {
     })
     fechaFin: string;
 
-    @ManyToOne(() => Empleado, empleado => empleado.histSueldo)
+    @ManyToOne(() => Empleado, empleado => empleado.id)
     empleado: Empleado;
 
     @PrimaryColumn()

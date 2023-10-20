@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
 import { Venta } from "./venta.entity";
 import { Inventario } from "./inventario.entity";
 
@@ -10,10 +10,10 @@ export class Hist_Venta {
     @Column('integer')
     cantVend: number;
 
-    @ManyToOne(() => Venta, venta => venta.producVend)
+    @ManyToOne(() => Venta, venta => venta.id)
     venta: Venta;
 
-    @ManyToOne(() => Inventario, inventario => inventario.producInv)
+    @ManyToOne(() => Inventario, inventario => inventario.id)
     inventario: Inventario;
 
     @PrimaryColumn()

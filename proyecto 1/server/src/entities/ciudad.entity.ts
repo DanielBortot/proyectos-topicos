@@ -1,7 +1,5 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Estado } from "./estado.entity";
-import { Inventario } from "./inventario.entity";
-import { Distribuidor } from "./distribuidor.entity";
 
 @Entity('Ciudad')
 export class Ciudad {
@@ -14,12 +12,6 @@ export class Ciudad {
     })
     nombre: string;
 
-    @ManyToOne(() => Estado, estado => estado.ciudades)
+    @ManyToOne(() => Estado, estado => estado.id)
     estado: Estado;
-
-    @OneToMany(() => Inventario, inventario => inventario.ciudad)
-    inventariosCiudad: Inventario[];
-
-    @OneToMany(() => Distribuidor, distribuidor => distribuidor.ciudad)
-    distribuidores: Distribuidor[];
 }

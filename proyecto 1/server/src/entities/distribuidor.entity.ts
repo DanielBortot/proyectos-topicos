@@ -1,5 +1,4 @@
-import { Check, Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
-import { Hist_Inventario } from "./hist_inventario.entity";
+import { Check, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Ciudad } from "./ciudad.entity";
 
 @Entity('Distribuidor')
@@ -24,9 +23,6 @@ export class Distribuidor {
     })
     rif: number;
 
-    @OneToMany(() => Hist_Inventario, hist_inv => hist_inv.distribuidor)
-    inventariosDist: Hist_Inventario[];
-
-    @ManyToOne(() => Ciudad, ciudad => ciudad.distribuidores)
+    @ManyToOne(() => Ciudad, ciudad => ciudad.id)
     ciudad: Ciudad;
 }

@@ -1,6 +1,5 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Pais } from "./pais.entity";
-import { Ciudad } from "./ciudad.entity";
 
 @Entity('Estado')
 export class Estado {
@@ -13,9 +12,6 @@ export class Estado {
     })
     nombre: string;
 
-    @ManyToOne(() => Pais, pais => pais.estados)
+    @ManyToOne(() => Pais, pais => pais.id)
     pais: Pais;
-
-    @OneToMany(() => Ciudad, ciudad => ciudad.estado)
-    ciudades: Ciudad[];
 }

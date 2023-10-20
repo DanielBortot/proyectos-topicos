@@ -1,5 +1,4 @@
-import { Check, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Venta } from "./venta.entity";
+import { Check, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('Cliente')
 @Check('"cedula" >= 1000000 and "cedula" <= 100000000')
@@ -39,6 +38,4 @@ export class Cliente {
     })
     cedula: number;
 
-    @OneToMany(() => Venta, venta => venta.cliente)
-    ventas: Venta[];
 }

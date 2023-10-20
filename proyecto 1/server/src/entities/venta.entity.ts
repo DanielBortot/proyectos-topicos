@@ -13,13 +13,9 @@ export class Venta {
     })
     monto: number;
 
-    @ManyToOne(() => Hist_Asistencia, hist_asistencias => hist_asistencias.ventas)
+    @ManyToOne(() => Hist_Asistencia, hist_asistencias => hist_asistencias.empleado)
     asistencia: Hist_Asistencia;
 
-    @ManyToOne(() => Cliente, cliente => cliente.ventas)
+    @ManyToOne(() => Cliente, cliente => cliente.id)
     cliente: Cliente;
-
-    @OneToMany(() => Hist_Venta, hist_venta => hist_venta.venta)
-    producVend: Hist_Venta[];
-
 }

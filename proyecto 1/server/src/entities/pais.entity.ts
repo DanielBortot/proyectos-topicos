@@ -1,5 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Estado } from "./estado.entity";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('Pais')
 export class Pais {
@@ -11,7 +10,4 @@ export class Pais {
         unique: true
     })
     nombre: string;
-
-    @OneToMany(() => Estado, estado => estado.pais)
-    estados: Estado[];
 }

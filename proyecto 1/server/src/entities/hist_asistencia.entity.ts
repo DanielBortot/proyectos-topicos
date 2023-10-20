@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
 import { Empleado } from "./empleado.entity";
 import { Venta } from "./venta.entity";
 
@@ -15,9 +15,9 @@ export class Hist_Asistencia {
     })
     horaSalida: Date;
 
-    @ManyToOne(() => Empleado, empleado => empleado.asistencias)
+    @ManyToOne(() => Empleado, empleado => empleado.id)
     empleado: Empleado;
 
-    @OneToMany(() => Venta, venta => venta.asistencia)
-    ventas: Venta[];
+    @PrimaryColumn()
+    empleadoId: number; 
 }

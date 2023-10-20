@@ -15,10 +15,10 @@ export class Hist_Inventario {
     @Column('integer')
     cantidadComp: number;
 
-    @ManyToOne(() => Distribuidor, distribuidor => distribuidor.inventariosDist)
+    @ManyToOne(() => Distribuidor, distribuidor => distribuidor.id)
     distribuidor: Distribuidor;
 
-    @ManyToOne(() => Inventario, inventario => inventario.inventariosInv)
+    @ManyToOne(() => Inventario, inventario => inventario.id)
     inventario: Inventario;
 
     @PrimaryColumn()
