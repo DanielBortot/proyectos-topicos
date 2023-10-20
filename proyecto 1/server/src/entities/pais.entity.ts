@@ -7,7 +7,8 @@ export class Pais {
     id: number;
 
     @Column('varchar', {
-        length: 50
+        length: 50,
+        unique: true
     })
     nombre: string;
 

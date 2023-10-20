@@ -4,7 +4,7 @@ import { Inventario } from "./inventario.entity";
 
 @Entity('Hist_Inventario')
 export class Hist_Inventario {
-    @Column('date')
+    @PrimaryColumn('date')
     fecha: string;
 
     @Column('real', {

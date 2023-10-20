@@ -1,23 +1,27 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Check, Column, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { Empleado } from "./empleado.entity";
 
 @Entity('Hist_Salarios')
+@Check('"numContrato" > 0')
+@Check('"sueldoQuinc" > 0')
 export class Hist_Salarios {
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Column('text')
-    numContrato: string;
+    @Column('integer')
+    numContrato: number;
 
     @Column('integer')
     sueldoQuinc: number;
 
-    @Column('date')
+    @PrimaryColumn('date')
     fechaIni: string;
 
-    @Column('date')
+    @Column('date', {
+        nullable: true
+    })
     fechaFin: string;
 
-    @ManyToOne(() => Empleado, empleado => empleado.sueldos)
+    @ManyToOne(() => Empleado, empleado => empleado.histSueldo)
     empleado: Empleado;
+
+    @PrimaryColumn()
+    empleadoId: number;
 }

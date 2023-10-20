@@ -1,10 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import { Venta } from "./venta.entity";
 import { Inventario } from "./inventario.entity";
 
 @Entity('Hist_Venta')
 export class Hist_Venta {
-    @Column('date')
+    @PrimaryColumn('date')
     fecha: string;
 
     @Column('integer')

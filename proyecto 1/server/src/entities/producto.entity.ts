@@ -7,11 +7,14 @@ export class Producto {
     id: number;
 
     @Column('varchar', {
-        length: 100
+        length: 100,
+        unique: true
     })
     nombre: string;
 
-    @Column('text')
+    @Column('text', {
+        nullable: true
+    })
     descripcion: string;
 
     @OneToMany(() => Inventario, inventario => inventario.producto)

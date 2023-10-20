@@ -12,6 +12,11 @@ export class Inventario {
     @Column('integer')
     cantidad: number;
 
+    @Column('real', {
+        scale: 2
+    })
+    costoVenta: number;
+
     @OneToMany(() => Hist_Venta, hist_venta => hist_venta.inventario)
     producInv: Hist_Venta[];
 
