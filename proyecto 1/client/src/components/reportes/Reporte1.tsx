@@ -111,7 +111,7 @@ export default function Reporte1 () {
                 <Graph></Graph>
             </div>
 
-            <div className='table'>
+            <div className='table' style={{width: '100%'}}>
                 <CustomizedTables></CustomizedTables>
             </div>
 

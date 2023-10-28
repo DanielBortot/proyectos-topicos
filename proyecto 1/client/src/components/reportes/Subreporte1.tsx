@@ -74,7 +74,7 @@ export default function Subreporte1 () {
             </div>
 
             <div className='buttons'>
-                <Button size="medium" variant="contained" startIcon={<ArrowBackIcon />} onClick={() => navigate("/")} > Regresar </Button>
+                <Button size="medium" variant="contained" startIcon={<ArrowBackIcon />} onClick={() => navigate("/reporte1")} > Regresar </Button>
             </div>
 
             <div className='table'>
