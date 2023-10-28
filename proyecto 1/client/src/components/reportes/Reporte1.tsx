@@ -1,5 +1,6 @@
 
 import '../../assets/ReporteBase.css'
+import logo from '../../assets/logo.png';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -99,6 +100,9 @@ export default function Reporte1 () {
         <div className='main'>
 
             <div className='title'>
+                <div className='logoContainer'>
+                  <img src={logo} alt="" />
+                </div>
                 <h2> Reporte 1 Producto Mas vendido </h2>
             </div>
 
