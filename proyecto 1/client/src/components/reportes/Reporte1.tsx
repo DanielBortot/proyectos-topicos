@@ -13,6 +13,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import TableChartIcon from '@mui/icons-material/TableChart';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 
 import { Chart } from "react-google-charts";
 
@@ -28,7 +31,7 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 export const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': { backgroundColor: theme.palette.action.hover, },
-  '&:last-child td, &:last-child th': { border: 0, },
+  '&:last-child td, &:last-child th': { border: 12, },
 }));
 
 const rows = [
@@ -41,10 +44,10 @@ const rows = [
 
 const data = [
   ["Element", "Density", { role: "style" }],
-  ["Copper", 8.94, "#b87333"], // RGB value
-  ["Silver", 10.49, "silver"], // English color name
-  ["Gold", 19.3, "gold"],
-  ["Platinum", 21.45, "color: #e5e4e2"], // CSS-style declaration
+  ["Copper", 8.94, "#rgb(66, 188, 249)"], // RGB value
+  ["Silver", 10.49, "rgb(157, 203, 223)"], // English color name
+  ["Gold", 19.3, "#rgb(66, 188, 249)"],
+  ["Platinum", 21.45, "rgb(157, 203, 223)"], // CSS-style declaration
 ];
 
 function Graph() {
@@ -107,8 +110,9 @@ export default function Reporte1 () {
             </div>
 
             <div className='buttons'>
-                <Button size="medium" variant="contained" onClick={() => navigate("/")} > Regresar </Button>
-                <Button size="medium" variant="contained" onClick={() => navigate("/reporte1/subreporte")} > Mostrar Datos </Button>
+                <Button size="medium" variant="contained" onClick={() => navigate("/")} startIcon={<ArrowBackIcon />}> Regresar </Button>
+                <div className='space'></div>
+                <Button size="medium" variant="contained" onClick={() => navigate("/reporte1/subreporte")} startIcon={<TableChartIcon />} > Mostrar mas datos </Button>
             </div>
 
             <div className='api'>

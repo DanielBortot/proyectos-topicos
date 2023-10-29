@@ -70,7 +70,7 @@ export default function Subreporte1 () {
         <div className="main">
 
             <div className='title'>
-                <h2> Reporte 1: Datos </h2>
+                <h2> Reporte 1 Producto Mas vendido </h2>
             </div>
 
             <div className='buttons'>

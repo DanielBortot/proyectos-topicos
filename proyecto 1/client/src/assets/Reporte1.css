@@ -10,6 +10,13 @@
     font-weight: 600;
     transition: all ease .4s;
 }
+
+.space {
+    width: 40px;
+    height: auto;
+    display: inline-block;
+  }
+
 .boton-personalizado { /*Es un boton que encontre que se veia bien pero no pude meterle iconos*/
     text-decoration:none;
     font-weight: 600;
