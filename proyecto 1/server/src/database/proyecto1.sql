@@ -135,8 +135,8 @@ SET row_security = off;
 
 CREATE TYPE public.datos AS (
 	"primerNombre" character varying(50),
+    "segundoNombre" character varying(50),
 	"primerApellido" character varying(50),
-	"segundoNombre" character varying(50),
 	"segundoApellido" character varying(50),
 	telefono character varying(11),
 	cedula integer
