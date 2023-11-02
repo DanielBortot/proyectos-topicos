@@ -7,7 +7,6 @@ import Reporte5 from "./components/reportes/Reporte5";
 import Reporte6 from "./components/reportes/Reporte6";
 import Reporte7 from "./components/reportes/Reporte7";
 import Reporte8 from "./components/reportes/Reporte8";
-import Subreporte1 from "./components/reportes/Subreporte1";
 import Inicio from "./components/Inicio";
 
 function App() {
@@ -23,7 +22,6 @@ function App() {
       <Route path="/reporte6" element={<Reporte6/>}/>
       <Route path="/reporte7" element={<Reporte7/>}/>
       <Route path="/reporte8" element={<Reporte8/>}/>
-      <Route path="/reporte1/subreporte" element={<Subreporte1/>}/>
     </Routes>
   );
 }

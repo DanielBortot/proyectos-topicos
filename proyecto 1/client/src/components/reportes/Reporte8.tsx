@@ -1,8 +1,9 @@
+
 import '../../assets/ReporteBase.css'
 import logo from '../../assets/logo.png';
 
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -14,92 +15,97 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
+
+import { Chart } from "react-google-charts";
+import { useEffect, useState } from 'react';
+import { DatosRep8 } from '../../types/datosRep8';
+import axios from 'axios';
+
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
-  
-  export const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': { backgroundColor: theme.palette.action.hover, },
-    '&:last-child td, &:last-child th': { border: 12, },
-  }));
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
 
-function createData(
-    producto: string,
-    descripcion: string,
-    precioOrig: number,
-    precioInf: number,
-    precioDif: number,
-  ) {
-    return { producto, descripcion, precioOrig, precioInf, precioDif };
-  }
-
-const rows = [
-    createData('Frozen yoghurt', 'hola', 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 'hola', 9.0, 37, 4.3),
-    createData('Eclair', 'hola', 16.0, 24, 6.0),
-    createData('Cupcake', 'hola', 3.7, 67, 4.3),
-    createData('Gingerbread', 'hola', 16.0, 49, 3.9),
-  ];
-
-  function CustomizedTables() {
-    return (
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Producto</StyledTableCell>
-              <StyledTableCell align="right">Descripcion</StyledTableCell>
-              <StyledTableCell align="right">Precio Normal</StyledTableCell>
-              <StyledTableCell align="right">Precio con Inflacion</StyledTableCell>
-              <StyledTableCell align="right">Diferencia de Precios</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.producto}>
-                <StyledTableCell component="th" scope="row">
-                  {row.producto}
-                </StyledTableCell>
-                <StyledTableCell align="right">{row.descripcion}$</StyledTableCell>
-                <StyledTableCell align="right">{row.precioOrig}$</StyledTableCell>
-                <StyledTableCell align="right">{row.precioInf}$</StyledTableCell>
-                <StyledTableCell align="right">{row.precioDif}$</StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
-  }
+export const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': { backgroundColor: theme.palette.action.hover, },
+  '&:last-child td, &:last-child th': { border: 12, },
+}));
 
 export default function Reporte8 () {
 
     const [inflacion, setInflacion] = useState<string>('');
+    const [tabla, setTabla] = useState<DatosRep8[]>([]);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        (async () => {
+            //const res: DatosRep8[] = await (await axios.post('', {inflacion: 0})).data;
+            //setTabla(res);
+        })();
+    },[])
 
     function validacion (e: React.ChangeEvent<HTMLInputElement>) {
         
-        if (/^[0-9]+(,[0-9]+)?$/.test(e.target.value) || e.target.value == '') {
+        if (/^[0-9]+(,[0-9]+)?$/.test(e.target.value) || e.target.value === '') {
             setInflacion(e.target.value);
         }
     }
 
-    function enviar () {
+    async function enviar () {
         let num;
-        if (inflacion == '') {
-            num = 1;
+        if (inflacion === '') {
+            num = 0;
         }
         else {
             num = parseInt(inflacion);
         }
-
+        // const res: DatosRep8[] = await (await axios.post('', {inflacion: num})).data;
+        // setTabla(res)
     }
+
+    let data = tabla.map((dato) => {return [dato.nombre, dato.precio_inflado, dato.precio_original]});
+    data.unshift(["Element", "Precio Inflado", "Precio Original"]);
+
+      
+      function Graph() {
+        return ( <Chart chartType="ColumnChart" width="100%" height="400px" data={data} /> );
+      }
+      
+        function CustomizedTables() {
+          return (
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell>Producto</StyledTableCell>
+                    <StyledTableCell align="right">Descripcion</StyledTableCell>
+                    <StyledTableCell align="right">Precio Normal</StyledTableCell>
+                    <StyledTableCell align="right">Precio con Inflacion</StyledTableCell>
+                    <StyledTableCell align="right">Diferencia de Precios</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {tabla.map((dato) => (
+                    <StyledTableRow key={dato.nombre}>
+                      <StyledTableCell component="th" scope="row">
+                        {dato.nombre}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">{dato.descripcion}$</StyledTableCell>
+                      <StyledTableCell align="right">{dato.precio_original}$</StyledTableCell>
+                      <StyledTableCell align="right">{dato.precio_inflado}$</StyledTableCell>
+                      <StyledTableCell align="right">{dato.diferencia_precio}$</StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          );
+        }
 
     return(
         <div className='main'>
@@ -113,6 +119,10 @@ export default function Reporte8 () {
 
             <div className='buttons'>
                 <Button size="medium" variant="contained" onClick={() => navigate("/")} startIcon={<ArrowBackIcon />}> Regresar </Button>
+            </div>
+
+            <div className='api'>
+                <Graph></Graph>
             </div>
 
             <div className='entrada'>
