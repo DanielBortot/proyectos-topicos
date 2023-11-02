@@ -1,0 +1,95 @@
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #D9D9D9;
+}
+
+.main {
+    justify-content: center;
+    padding: 3%;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+.title {
+    position: relative;
+    font-family:monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+}
+
+.title h2 {
+    padding: 15px;
+    background-color:  rgb(66, 188, 249);
+    border-radius: 40px;
+    box-shadow: 5px 3px 6px 1px #1d160d33;
+}
+
+.buttons {
+    margin-top: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table {
+    margin-top: 1%;
+    width: 95%;
+}
+
+.api {
+    margin-top: 1%;
+}
+
+.logoContainer {
+    position: absolute;
+    left: 0;
+    top: -15px;
+    width: 190px;
+    height: 110px;
+}
+
+.logoContainer img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    box-shadow: 5px 5px 10px 1px #1a140c9a;
+}
+
+.entrada {
+    text-align: right;
+    width: 100%;
+    margin-top: 25px;
+}
+
+.entrada input {
+    width: 12%;
+    padding: 7px 5px 7px 5px;
+    border-radius: 15px;
+    text-align: center;
+    outline: none;
+    border: 2px solid rgba(49, 49, 49, 0.6);
+    margin-right: 5px;
+}
+
+.entrada button {
+    padding: 3px;
+    border-radius: 5px;
+    outline: none;
+    border: 2px solid rgba(49, 49, 49, 0.6);
+    cursor: pointer;
+    transition: all ease .3s;
+}
+
+.entrada button:hover {
+    background-color: rgba(201, 196, 196, 0.938);
+}
