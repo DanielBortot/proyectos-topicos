@@ -5,9 +5,12 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: #D9D9D9;
+}
+
 .main {
     justify-content: center;
-    background-color: #D9D9D9;
     padding: 3%;
     width: 100%;
     height: 100%;
@@ -60,4 +63,32 @@
     height: 100%;
     border-radius: 50px;
     box-shadow: 5px 5px 10px 1px #1a140c9a;
+}
+
+.entrada {
+    text-align: right;
+    width: 100%;
+}
+
+.entrada input {
+    width: 12%;
+    padding: 7px 5px 7px 5px;
+    border-radius: 15px;
+    text-align: center;
+    outline: none;
+    border: 2px solid rgba(49, 49, 49, 0.6);
+    margin-right: 5px;
+}
+
+.entrada button {
+    padding: 3px;
+    border-radius: 5px;
+    outline: none;
+    border: 2px solid rgba(49, 49, 49, 0.6);
+    cursor: pointer;
+    transition: all ease .3s;
+}
+
+.entrada button:hover {
+    background-color: rgba(201, 196, 196, 0.938);
 }
