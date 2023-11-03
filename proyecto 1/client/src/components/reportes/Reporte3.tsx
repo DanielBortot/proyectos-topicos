@@ -17,6 +17,7 @@ import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { DatosRep3 } from '../../types/datosRep3';
 import Chart from 'react-google-charts';
+import axios from 'axios';
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -40,15 +41,14 @@ export default function Reporte3 () {
 
     useEffect(() => {
         (async () => {
-            //const res: DatosRep3[] = await (await axios.get('')).data;
-            //setTabla(res);
+            const res: DatosRep3[] = await (await axios.get('/reportes/reporte3')).data;
+            setTabla(res);
         })();
       },[]);
-
-    let data = tabla.map((dato) => {return [dato.nombre, dato.ventas]});
-    data.unshift(["Element", "Ventas Hechas"]);
     
     function Graph() {
+      let data = tabla.map((dato) => {return [dato.nombre, parseInt(dato.ventas)]});
+      data.unshift(["Element", "Ventas Hechas"]);
       return ( <Chart chartType="ColumnChart" width="100%" height="400px" data={data} /> );
     }
 
@@ -91,9 +91,9 @@ export default function Reporte3 () {
                 <Button size="medium" variant="contained" onClick={() => navigate("/")} startIcon={<ArrowBackIcon />}> Regresar </Button>
             </div>
 
-            <div className='api'>
+            {tabla.length > 0 && <div className='api'>
                 <Graph></Graph>
-            </div>
+            </div>}
 
             <div className='table' style={{width: '100%'}}>
                 <CustomizedTables></CustomizedTables>

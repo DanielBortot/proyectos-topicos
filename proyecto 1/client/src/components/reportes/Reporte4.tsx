@@ -15,6 +15,7 @@ import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { DatosRep4 } from '../../types/datosRep4';
 import Chart from 'react-google-charts';
+import axios from 'axios';
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -38,15 +39,14 @@ export default function Reporte4 () {
 
     useEffect(() => {
         (async () => {
-            //const res: DatosRep4[] = await (await axios.get('')).data;
-            //setTabla(res);
+            const res: DatosRep4[] = await (await axios.get('/reportes/reporte4')).data;
+            setTabla(res);
         })();
       },[]);
 
-    let data = tabla.map((dato) => {return [dato.nombre, dato.ingresos]});
-    data.unshift(["Element", "Ingresos Obtenidos"]);
-
     function Graph() {
+      let data = tabla.map((dato) => {return [dato.nombre, parseInt(dato.ingresos)]});
+      data.unshift(["Element", "Ingresos Obtenidos"]);
         return ( <Chart chartType="ColumnChart" width="100%" height="400px" data={data} /> );
     }
 
@@ -56,11 +56,8 @@ export default function Reporte4 () {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-                  <StyledTableCell align="right">Calories</StyledTableCell>
-                  <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-                  <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-                  <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+                  <StyledTableCell>Sucursal</StyledTableCell>
+                  <StyledTableCell align="right">Ingresos Obtenidos</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -69,7 +66,7 @@ export default function Reporte4 () {
                     <StyledTableCell component="th" scope="row">
                       {dato.nombre}
                     </StyledTableCell>
-                    <StyledTableCell align="right">{dato.ingresos}</StyledTableCell>
+                    <StyledTableCell align="right">{dato.ingresos}$</StyledTableCell>
                   </StyledTableRow>
                 ))}
               </TableBody>
