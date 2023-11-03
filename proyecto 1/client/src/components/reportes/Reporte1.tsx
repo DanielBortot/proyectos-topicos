@@ -19,6 +19,7 @@ import { useEffect, useState } from 'react';
 
 import { Chart } from "react-google-charts";
 import { DatosRep1 } from '../../types/datosRep1';
+import axios from 'axios';
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -42,15 +43,14 @@ export default function Reporte1 () {
 
     useEffect(() => {
       (async () => {
-          //const res: DatosRep1[] = await (await axios.get('')).data;
-          //setTabla(res);
+          const res: DatosRep1[] = await (await axios.get('/reportes/reporte1')).data;
+          setTabla(res);
       })();
     },[]);
-
-    let data = tabla.map((dato) => {return [dato.nombre, dato.cantvend]});
-    data.unshift(["Element", "Cantidad Vendida"]);
     
     function Graph() {
+      let data = tabla.map((dato) => {return [dato.nombre, parseInt(dato.cantvend)]});
+      data.unshift(["Element", "Cantidad Vendida"]);
       return ( <Chart chartType="ColumnChart" width="100%" height="400px" data={data} /> );
     }
     
@@ -95,9 +95,9 @@ export default function Reporte1 () {
                 <Button size="medium" variant="contained" onClick={() => navigate("/")} startIcon={<ArrowBackIcon />}> Regresar </Button>
             </div>
 
-            <div className='api'>
+            {tabla.length > 0 && <div className='api'>
                 <Graph></Graph>
-            </div>
+            </div>}
 
             <div className='table' style={{width: '100%'}}>
                 <CustomizedTables></CustomizedTables>

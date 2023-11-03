@@ -41,11 +41,13 @@ export default function Reporte8 () {
     const [inflacion, setInflacion] = useState<string>('');
     const [tabla, setTabla] = useState<DatosRep8[]>([]);
     const navigate = useNavigate();
-
+    let data: any = [];
     useEffect(() => {
         (async () => {
-            //const res: DatosRep8[] = await (await axios.post('', {inflacion: 0})).data;
-            //setTabla(res);
+            const res: DatosRep8[] = await (await axios.post('/reportes/reporte8', {inflacion: 0})).data;
+            setTabla(res);
+            data = res.map((dato) => {return [`${dato.nombre}-${dato.ciudad}`, dato.precio_inflado, dato.precio_original]});
+            console.log(data)
         })();
     },[])
 
@@ -64,15 +66,15 @@ export default function Reporte8 () {
         else {
             num = parseInt(inflacion);
         }
-        // const res: DatosRep8[] = await (await axios.post('', {inflacion: num})).data;
-        // setTabla(res)
+        const res: DatosRep8[] = await (await axios.post('/reportes/reporte8', {inflacion: num})).data;
+        setTabla(res)
+        data = res.map((dato) => {return [`${dato.nombre}-${dato.ciudad}`, dato.precio_inflado, dato.precio_original]});
     }
-
-    let data = tabla.map((dato) => {return [dato.nombre, dato.precio_inflado, dato.precio_original]});
-    data.unshift(["Element", "Precio Inflado", "Precio Original"]);
-
       
       function Graph() {
+        data = tabla.map((dato) => {return [`${dato.nombre}-${dato.ciudad}`, dato.precio_inflado, dato.precio_original]});
+        data.unshift(["Element", "Precio Inflado", "Precio Original"]);
+        console.log(data)
         return ( <Chart chartType="ColumnChart" width="100%" height="400px" data={data} /> );
       }
       
@@ -95,7 +97,7 @@ export default function Reporte8 () {
                       <StyledTableCell component="th" scope="row">
                         {dato.nombre}
                       </StyledTableCell>
-                      <StyledTableCell align="right">{dato.descripcion}$</StyledTableCell>
+                      <StyledTableCell align="right">{dato.descripcion}</StyledTableCell>
                       <StyledTableCell align="right">{dato.precio_original}$</StyledTableCell>
                       <StyledTableCell align="right">{dato.precio_inflado}$</StyledTableCell>
                       <StyledTableCell align="right">{dato.diferencia_precio}$</StyledTableCell>
@@ -121,9 +123,9 @@ export default function Reporte8 () {
                 <Button size="medium" variant="contained" onClick={() => navigate("/")} startIcon={<ArrowBackIcon />}> Regresar </Button>
             </div>
 
-            <div className='api'>
+            {tabla.length > 0 && <div className='api'>
                 <Graph></Graph>
-            </div>
+            </div>}
 
             <div className='entrada'>
                 <input type="text" value={inflacion} onChange={e => validacion(e)} placeholder='Inflacion en porcentaje'/>

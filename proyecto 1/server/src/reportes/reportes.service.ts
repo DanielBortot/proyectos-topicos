@@ -16,7 +16,7 @@ export class ReportesService {
     async reporte2() {
         const queryRunner = this.dataSource.createQueryRunner();
         await queryRunner.connect();
-        const result = queryRunner.query('SELECT * FROM report2()');
+        const result = queryRunner.query('SELECT * FROM reporte2()');
         await queryRunner.release();
         return result;
     }
@@ -64,7 +64,7 @@ export class ReportesService {
     async reporte8(inflacion: number) {
         const queryRunner = this.dataSource.createQueryRunner();
         await queryRunner.connect();
-        const result = queryRunner.query('SELECT * FROM reporte8(?)', [inflacion]);
+        const result = queryRunner.query(`SELECT * FROM reporte8(${inflacion})`);
         await queryRunner.release();
         return result;
     }

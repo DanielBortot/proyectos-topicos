@@ -4,4 +4,5 @@ export type DatosRep8 = {
     precio_original: number;
     precio_inflado: number;
     diferencia_precio: number;
+    ciudad: string;
 }
