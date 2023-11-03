@@ -54,11 +54,11 @@ export default function Reporte7 () {
     async function enviar () {
       const res: DatosRep7[] = await (await axios.post('/reportes/reporte7', {ciudad})).data;
       setTabla(res)
-      data = res.map((dato) => {return [dato.nombre, parseInt(dato.ventas)]});
+      data = res.map((dato) => {return [dato.nombre_completo, parseInt(dato.ventas)]});
   }
 
     function Graph() {
-        data = tabla.map((dato) => {return [dato.nombre, parseInt(dato.ventas)]});
+        data = tabla.map((dato) => {return [dato.nombre_completo, parseInt(dato.ventas)]});
         data.unshift(["Element", "Ventas Totales Realizadas"]);
         return ( <Chart chartType="ColumnChart" width="100%" height="400px" data={data} /> );
     }
@@ -70,16 +70,20 @@ export default function Reporte7 () {
               <TableHead>
                 <TableRow>
                   <StyledTableCell>Nombre del Empleado</StyledTableCell>
+                  <StyledTableCell align="right">Cedula</StyledTableCell>
+                  <StyledTableCell align="right">Telefono</StyledTableCell>
                   <StyledTableCell align="right">Cantidad de Ventas Realizadas</StyledTableCell>
                   <StyledTableCell align="right">Ciudad</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {tabla.map((dato) => (
-                  <StyledTableRow key={dato.nombre}>
+                  <StyledTableRow key={dato.nombre_completo}>
                     <StyledTableCell component="th" scope="row">
-                      {dato.nombre}
+                      {dato.nombre_completo}
                     </StyledTableCell>
+                    <StyledTableCell align="right">{dato.cedula}</StyledTableCell>
+                    <StyledTableCell align="right">{dato.telefono}</StyledTableCell>
                     <StyledTableCell align="right">{dato.ventas}</StyledTableCell>
                     <StyledTableCell align="right">{dato.ciudad}</StyledTableCell>
                   </StyledTableRow>

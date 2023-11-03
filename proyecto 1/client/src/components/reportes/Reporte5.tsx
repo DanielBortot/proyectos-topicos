@@ -15,6 +15,7 @@ import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { DatosRep5 } from '../../types/datosRep5';
 import Chart from 'react-google-charts';
+import axios from 'axios';
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -38,15 +39,14 @@ export default function Reporte5 () {
 
     useEffect(() => {
         (async () => {
-            //const res: DatosRep5[] = await (await axios.get('')).data;
-            //setTabla(res);
+            const res: DatosRep5[] = await (await axios.get('/reportes/reporte5')).data;
+            setTabla(res);
         })();
     },[]);
-
-    let data = tabla.map((dato) => {return [dato.nombre, dato.totalprecio]});
-    data.unshift(["Element", "Precio Total"]);
     
     function Graph() {
+      let data = tabla.map((dato) => {return [dato.nombre, parseInt(dato.totalingreso)]});
+      data.unshift(["Element", "Ingreso Total"]);
       return ( <Chart chartType="ColumnChart" width="100%" height="400px" data={data} /> );
     }
 
@@ -58,7 +58,7 @@ export default function Reporte5 () {
                 <TableRow>
                   <StyledTableCell>Producto</StyledTableCell>
                   <StyledTableCell align="right">Descripcion</StyledTableCell>
-                  <StyledTableCell align="right">Precio Total</StyledTableCell>
+                  <StyledTableCell align="right">Ingreso Total</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -68,7 +68,7 @@ export default function Reporte5 () {
                       {dato.nombre}
                     </StyledTableCell>
                     <StyledTableCell align="right">{dato.descripcion}</StyledTableCell>
-                    <StyledTableCell align="right">{dato.totalprecio}$</StyledTableCell>
+                    <StyledTableCell align="right">{dato.totalingreso}$</StyledTableCell>
                   </StyledTableRow>
                 ))}
               </TableBody>
@@ -91,9 +91,9 @@ export default function Reporte5 () {
                 <Button size="medium" variant="contained" onClick={() => navigate("/")} startIcon={<ArrowBackIcon />}> Regresar </Button>
             </div>
 
-            <div className='api'>
+            {tabla.length > 0 && <div className='api'>
                 <Graph></Graph>
-            </div>
+            </div>}
 
             <div className='table' style={{width: '100%'}}>
                 <CustomizedTables></CustomizedTables>

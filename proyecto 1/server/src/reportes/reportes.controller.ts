@@ -31,9 +31,9 @@ export class ReportesController {
         return this.reportesService.reporte5();
     }
 
-    @Get('reporte6')
-    reporte6 () {
-        return this.reportesService.reporte6();
+    @Post('reporte6')
+    reporte6 (@Body() body: {ciudad: string}) {
+        return this.reportesService.reporte6(body.ciudad);
     }
 
     @Post('reporte7')

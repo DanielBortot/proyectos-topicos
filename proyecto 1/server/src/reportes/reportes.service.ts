@@ -45,10 +45,10 @@ export class ReportesService {
         return result;
     }
 
-    async reporte6() {
+    async reporte6(ciudad: string) {
         const queryRunner = this.dataSource.createQueryRunner();
         await queryRunner.connect();
-        const result = queryRunner.query('SELECT * FROM reporte6()');
+        const result = queryRunner.query(`SELECT * FROM reporte6('%${ciudad}%')`);
         await queryRunner.release();
         return result;
     }

@@ -15,6 +15,7 @@ import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { DatosRep6 } from '../../types/datosRep6';
 import axios from 'axios';
+import Chart from 'react-google-charts';
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -34,14 +35,34 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
 export default function Reporte6 () {
 
   const [tabla, setTabla] = useState<DatosRep6[]>([]);
+  const [ciudad, setCiudad] = useState<string>('Hatillo');
   const navigate = useNavigate();
+  let data: any = [];
 
   useEffect(() => {
       (async () => {
-          // const res: DatosRep6[] = await (await axios.get('/reportes/reporte6')).data;
-          // setTabla(res);
+          const res: DatosRep6[] = await (await axios.post('/reportes/reporte6', {ciudad})).data;
+          setTabla(res);
+          console.log(res)
       })();
     },[]);
+
+  function validacion (e: React.ChangeEvent<HTMLInputElement>) {
+        
+      setCiudad(e.target.value);
+  }
+
+  async function enviar () {
+      const res: DatosRep6[] = await (await axios.post('/reportes/reporte6', {ciudad})).data;
+      setTabla(res)
+      data = res.map((dato) => {return [dato.nombre_completo, parseInt(dato.totalasistencias)]});
+  }
+
+  function Graph() {
+    data = tabla.map((dato) => {return [dato.nombre_completo, parseInt(dato.totalasistencias)]});
+    data.unshift(["Element", "Total de Asistencias"]);
+    return ( <Chart chartType="ColumnChart" width="100%" height="400px" data={data} /> );
+}
 
     function CustomizedTables() {
       return (
@@ -50,8 +71,8 @@ export default function Reporte6 () {
             <TableHead>
               <TableRow>
                 <StyledTableCell>Nombre Empleado</StyledTableCell>
-                <StyledTableCell align="right">Telefono</StyledTableCell>
                 <StyledTableCell align="right">Cedula</StyledTableCell>
+                <StyledTableCell align="right">Telefono</StyledTableCell>
                 <StyledTableCell align="right">Total de Asistencias</StyledTableCell>
               </TableRow>
             </TableHead>
@@ -84,6 +105,15 @@ export default function Reporte6 () {
 
             <div className='buttons'>
                 <Button size="medium" variant="contained" onClick={() => navigate("/")} startIcon={<ArrowBackIcon />}> Regresar </Button>
+            </div>
+
+            {tabla.length > 0 && <div className='api'>
+                <Graph></Graph>
+            </div>}
+
+            <div className='entrada'>
+                <input type="text" value={ciudad} onChange={e => validacion(e)} placeholder='Ingresa la ciudad'/>
+                <button onClick={() => enviar()}>Enviar</button>
             </div>
 
             <div className='table' style={{width: '100%'}}>

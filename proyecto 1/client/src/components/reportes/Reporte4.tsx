@@ -89,9 +89,9 @@ export default function Reporte4 () {
                 <Button size="medium" variant="contained" onClick={() => navigate("/")} startIcon={<ArrowBackIcon />}> Regresar </Button>
             </div>
 
-            <div className='api'>
+            {tabla.length > 0 && <div className='api'>
                 <Graph></Graph>
-            </div>
+            </div>}
 
             <div className='table' style={{width: '100%'}}>
                 <CustomizedTables></CustomizedTables>
