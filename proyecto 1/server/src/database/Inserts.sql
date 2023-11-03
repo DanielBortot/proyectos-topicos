@@ -13,25 +13,25 @@ INSERT INTO "Ciudad" (id,nombre, "estadoId") VALUES
 (4, 'ElTigre', 2);
 
 INSERT INTO "Producto" (id,nombre, descripcion) VALUES
-(1, 'Shampoo', NULL),
-(2, 'HarinaPan', NULL),
-(3, 'JabondetocadorDove', NULL),
+(1, 'Shampoo', 'shapoo de los chinos'),
+(2, 'HarinaPan', 'Productos polar'),
+(3, 'Jabon Dove', 'Jabon de tocador'),
 (4, 'Azucar', NULL),
-(5, 'Sal', NULL),
-(6, 'Pasta', NULL),
+(5, 'Sal', 'La extraida con la mejor mano de obra'),
+(6, 'Pasta', 'Pasta de los italianos'),
 (7, 'Arroz', NULL);
 
 INSERT INTO "Distribuidor" (id,nombre, telefono, rif, "ciudadId") VALUES
-(1, 'JuanGarciaLopez', '04241328505', '1000001',1),
-(2, 'MariaRodriguezMartinez', '04141338505', '1000002',1),
-(3, 'CarlosPerezFernandez', '04121324505', '1000003',1),
-(4, 'AnaMartinezGonzalez', '04241376505', '1000004',1),
-(5, 'LuisRodriguezSanchez', '04244448505', '1000005',1),
-(6, 'LauraLopezPerez', '04244567505', '1000006',1),
-(7, 'JavierGonzalezRodriguez', '04241326789', '1000007',1),
-(8, 'PaulaFernandezMartinez', '04161325566', '1000008',2),
-(9, 'PedroSanchezLopez', '04261328505', '1000009',2),
-(10, 'IsabelMartinezRodriguez', '04161117705', '1000010',2);
+(1, 'Rock & Food', '02121328500', '1000001',1),
+(2, 'Polar', '02121338505', '1000002',1),
+(3, 'Fresh Food', '02121324505', '1000003',1),
+(4, 'El tenedor de oro', '02121376505', '1000004',1),
+(5, 'Reyes de la comida', '02124448505', '1000005',1),
+(6, 'Chayane & CO', '02124567505', '1000006',1),
+(7, 'Odins Palace', '02121326789', '1000007',1),
+(8, 'Come Rico', '02121325566', '1000008',2),
+(9, 'Yummy Cafe', '02121328505', '1000009',2),
+(10, 'Deli Munchies', '02121117705', '1000010',2);
 
 
 INSERT INTO "Inventario" (id,cantidad, "costoVenta", "productoId", "ciudadId") VALUES
@@ -100,26 +100,26 @@ INSERT INTO "Hist_Inventario" (fecha, "costoUnidad", "cantidadComp", "inventario
 -- Inserción de datos en la tabla EMPLEADO
 INSERT INTO "Empleado" (id,datos_empleado)
 VALUES
-    (1,('Ana', 'Maria', 'López','Silva','04122403301',25446055)),
-    (2,('Carlos', 'Andrés', 'Rodríguez','Mendoza','04122403301', 24685999)),
-    (3,('Laura', 'Isabella', 'González','Bravo','04122403301', 28246205)),
-    (4,('Diego', NULL, 'Martínez','Velázquez','04122403301', 21231250)),
-    (5,('Marta', NULL, 'Pérez','Paredes','04122403301', 30246205)),
-    (6,('Javier', NULL, 'Sánchez','Cordero','04122403301', 9662942)),
-    (7,('Elena', NULL, 'Fernández','Ramírez','04122403301', 30246506)),
-    (8,('Andrés', 'Eduardo', 'Torres','Guzmán','04122403301', 29666256)),
-    (9,('Sofía', NULL, 'Ramírez','Rojas','04122403301', 28795312)),
-    (10,('Alejandro', NULL, 'Vargas','Rios','04122403301', 11455896)),
-    (11,('Carmen', NULL, 'Ruiz','Delgado','04122403301', 24978210)),
-    (12,('Sergio', NULL, 'García','Maldonado','04122403301', 20555698)),
-    (13,('Camila', 'Sofia', 'Guzmán','Delgado','04122403301', 30200265)),
-    (14,('Alfredo', 'Andres', 'Fung','Perez','04122403301', 29555254)),
-    (15,('Joao', NULL, 'De Sousa','Barradas','04122403301', 24455112)),
-    (16,('Carlos', 'Eduardo', 'Rodriguez','Sanchez','04122403301', 28946513)),
-    (17,('Laura', 'Valentina', 'Mendoza','Velazquez','04122403301', 27135468)),
-    (18,('Jacklyn', 'Vanessa', 'Farinez','De la Santisima Trinidad','04122403301', 26549513)),
-    (19,('Guztavo', NULL, 'Vizcanio','Rogel','04122403301', 20316413)),
-    (20,('Diego', 'Armando', 'Maradona','Gonzalez','04122403301', 28159357));
+    (1,('Ana', 'Maria', 'López','Silva','04122403300',25446055)),
+    (2,('Carlos', 'Andrés', 'Rodríguez','Mendoza','04122404501', 24685999)),
+    (3,('Laura', 'Isabella', 'González','Bravo','04122404201', 28246205)),
+    (4,('Diego', NULL, 'Martínez','Velázquez','04122407801', 21231250)),
+    (5,('Marta', NULL, 'Pérez','Paredes','04122408901', 30246205)),
+    (6,('Javier', NULL, 'Sánchez','Cordero','04122405601', 9662942)),
+    (7,('Elena', NULL, 'Fernández','Ramírez','04122408801', 30246506)),
+    (8,('Andrés', 'Eduardo', 'Torres','Guzmán','04122405401', 29666256)),
+    (9,('Sofía', NULL, 'Ramírez','Rojas','04122402101', 28795312)),
+    (10,('Alejandro', NULL, 'Vargas','Rios','04122402001', 11455896)),
+    (11,('Carmen', NULL, 'Ruiz','Delgado','04122407801', 24978210)),
+    (12,('Sergio', NULL, 'García','Maldonado','04122447801', 20555698)),
+    (13,('Camila', 'Sofia', 'Guzmán','Delgado','04122267801', 30200265)),
+    (14,('Alfredo', 'Andres', 'Fung','Perez','04122457801', 29555254)),
+    (15,('Joao', NULL, 'De Sousa','Barradas','04122787801', 24455112)),
+    (16,('Carlos', 'Eduardo', 'Rodriguez','Sanchez','04122897801', 28946513)),
+    (17,('Laura', 'Valentina', 'Mendoza','Velazquez','04122567801', 27135468)),
+    (18,('Jacklyn', 'Vanessa', 'Farinez','De la Santisima Trinidad','04122007801', 26549513)),
+    (19,('Guztavo', NULL, 'Vizcanio','Rogel','04122787801', 20316413)),
+    (20,('Diego', 'Armando', 'Maradona','Gonzalez','04122657801', 28159357));
 	
 	INSERT INTO "Hist_Salarios" ("fechaIni", "fechaFin", "numContrato", "sueldoQuinc", "empleadoId", "ciudadId")
 VALUES
@@ -216,7 +216,25 @@ INSERT INTO "Hist_Asistencia" (fecha, "horaEntrada", "horaSalida", "empleadoId")
 ('2023-09-27', '06:15:00', '18:45:00', 7),
 ('2023-01-28', '06:30:00', '18:15:00', 8),
 ('2023-02-28', '07:15:00', '19:30:00', 9),
-('2023-03-30', '06:45:00', '18:30:00', 10);
+('2023-03-30', '06:45:00', '18:30:00', 10),
+--edited
+('2023-01-24', '07:00:00', '19:45:00', 1),
+('2023-02-22', '07:15:00', '19:30:00', 1),
+('2023-03-23', '06:30:00', '18:15:00', 2),
+('2023-04-24', '06:45:00', '18:30:00', 2),
+('2023-09-25', '07:00:00', '19:45:00', 2),
+('2023-10-26', '07:30:00', '19:15:00', 2),
+('2023-09-27', '06:15:00', '18:45:00', 2),
+('2023-08-28', '06:30:00', '18:15:00', 10),
+('2023-07-27', '07:15:00', '19:30:00', 10),
+('2023-06-30', '06:45:00', '18:30:00', 10),
+('2023-02-10', '07:15:00', '19:30:00', 20),
+('2023-02-11', '06:30:00', '18:15:00', 4),
+('2023-03-12', '06:45:00', '18:30:00', 11),
+('2023-04-18', '07:00:00', '19:45:00', 13),
+('2023-05-14', '07:30:00', '19:15:00', 15),
+('2023-06-06', '06:15:00', '18:45:00', 15),
+('2023-07-16', '06:30:00', '18:15:00', 5);
 
 -- Inserción de datos en la tabla VENTA
 INSERT INTO "Venta" (id, hora, monto, "clienteId", "asistenciaFecha", "asistenciaEmpleadoId")
@@ -240,7 +258,19 @@ VALUES
     (17, '11:05', 125, 17, '2023-08-17', 17),
     (18, '12:20', 340, 18, '2023-09-18', 18),
     (19, '13:35', 40, 19, '2023-01-19', 19),
-    (20, '09:20', 160, 20, '2023-02-20', 20);
+    (20, '09:20', 160, 20, '2023-02-20', 20),
+
+-- Inserción de datos en la tabla VENTA
+    (21, '15:00', 25, 2, '2023-02-20', 20),
+    (22, '8:30', 80, 5, '2023-02-20', 20),
+    (23, '13:30', 52, 6, '2023-06-06', 6),
+    (24, '9:30', 384, 8, '2023-05-14', 14),
+    (25, '10:30', 130, 4, '2023-03-03', 3),
+    (26, '14:00', 6, 6, '2023-09-18', 18),
+    (27, '18:30', 4, 9, '2023-09-18', 18),
+    (28, '12:00', 175, 1, '2023-09-18', 18),
+    (29, '16:30', 483, 2, '2023-06-06', 6),
+    (30, '16:45', 30, 20, '2023-06-06', 6);
 
 -- Inserción de datos en la tabla HISTORICO_VENTA
 INSERT INTO "Hist_Venta" ("precioVent", "cantVend", "inventarioId", "ventaId")
@@ -307,4 +337,16 @@ VALUES
     (70, 14, 9, 18),
     (30, 6, 10, 18),
     (40, 10, 14, 19),
-    (160, 20, 13, 20);
+    (160, 20, 13, 20),
+
+-- Inserción de datos en la tabla HISTORICO_VENTA
+    (25, 5, 9, 21),
+    (80, 10, 13, 22),
+    (52, 26, 5, 23),
+    (384, 48, 8, 24),
+    (130, 65, 7, 25),
+    (6, 2, 12, 26),
+    (4, 1, 11, 27),
+    (175, 35, 10, 28),
+    (483, 69, 3, 29),
+    (30, 6, 1, 30);
