@@ -46,8 +46,6 @@ export default function Reporte8 () {
         (async () => {
             const res: DatosRep8[] = await (await axios.post('/reportes/reporte8', {inflacion: 0})).data;
             setTabla(res);
-            data = res.map((dato) => {return [`${dato.nombre}-${dato.ciudad}`, dato.precio_inflado, dato.precio_original]});
-            console.log(data)
         })();
     },[])
 
@@ -86,6 +84,7 @@ export default function Reporte8 () {
                   <TableRow>
                     <StyledTableCell>Producto</StyledTableCell>
                     <StyledTableCell align="right">Descripcion</StyledTableCell>
+                    <StyledTableCell align="right">Ciudad Almacen</StyledTableCell>
                     <StyledTableCell align="right">Precio Normal</StyledTableCell>
                     <StyledTableCell align="right">Precio con Inflacion</StyledTableCell>
                     <StyledTableCell align="right">Diferencia de Precios</StyledTableCell>
@@ -98,6 +97,7 @@ export default function Reporte8 () {
                         {dato.nombre}
                       </StyledTableCell>
                       <StyledTableCell align="right">{dato.descripcion}</StyledTableCell>
+                      <StyledTableCell align="right">{dato.ciudad}</StyledTableCell>
                       <StyledTableCell align="right">{dato.precio_original}$</StyledTableCell>
                       <StyledTableCell align="right">{dato.precio_inflado}$</StyledTableCell>
                       <StyledTableCell align="right">{dato.diferencia_precio}$</StyledTableCell>
