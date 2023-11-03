@@ -1,6 +1,7 @@
 import '../../assets/ReporteBase.css'
 import logo from '../../assets/logo.png';
 
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -12,6 +13,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { DatosRep6 } from '../../types/datosRep6';
+import axios from 'axios';
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -28,58 +31,46 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     '&:last-child td, &:last-child th': { border: 12, },
   }));
 
-function createData(
-    name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    protein: number,
-  ) {
-    return { name, calories, fat, carbs, protein };
-  }
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-  ];
-
-  function CustomizedTables() {
-    return (
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-              <StyledTableCell align="right">Calories</StyledTableCell>
-              <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-              <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-              <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.name}>
-                <StyledTableCell component="th" scope="row">
-                  {row.name}
-                </StyledTableCell>
-                <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                <StyledTableCell align="right">{row.protein}</StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
-  }
-
 export default function Reporte6 () {
 
-    const navigate = useNavigate();
+  const [tabla, setTabla] = useState<DatosRep6[]>([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+      (async () => {
+          // const res: DatosRep6[] = await (await axios.get('/reportes/reporte6')).data;
+          // setTabla(res);
+      })();
+    },[]);
+
+    function CustomizedTables() {
+      return (
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Nombre Empleado</StyledTableCell>
+                <StyledTableCell align="right">Telefono</StyledTableCell>
+                <StyledTableCell align="right">Cedula</StyledTableCell>
+                <StyledTableCell align="right">Total de Asistencias</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {tabla.map((dato) => (
+                <StyledTableRow key={dato.nombre_completo}>
+                  <StyledTableCell component="th" scope="row">
+                    {dato.nombre_completo}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{dato.cedula}</StyledTableCell>
+                  <StyledTableCell align="right">{dato.telefono}</StyledTableCell>
+                  <StyledTableCell align="right">{dato.totalasistencias}</StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      );
+    }
 
     return(
         <div className='main'>

@@ -15,6 +15,7 @@ import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { DatosRep7 } from '../../types/datosRep7';
 import Chart from 'react-google-charts';
+import axios from 'axios';
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -34,19 +35,31 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
 export default function Reporte7 () {
 
     const [tabla, setTabla] = useState<DatosRep7[]>([]);
+    const [ciudad, setCiudad] = useState<string>('Hatillo');
     const navigate = useNavigate();
+    let data: any = [];
 
     useEffect(() => {
         (async () => {
-            //const res: DatosRep7[] = await (await axios.get('')).data;
-            //setTabla(res);
+            const res: DatosRep7[] = await (await axios.post('/reportes/reporte7', {ciudad})).data;
+            setTabla(res);
         })();
       },[]);
 
-    let data = tabla.map((dato) => {return [dato.nombre, dato.ventas_realizadas]});
-    data.unshift(["Element", "Ventas Realizadas"]);
+    function validacion (e: React.ChangeEvent<HTMLInputElement>) {
+        
+        setCiudad(e.target.value);
+    }
+
+    async function enviar () {
+      const res: DatosRep7[] = await (await axios.post('/reportes/reporte7', {ciudad})).data;
+      setTabla(res)
+      data = res.map((dato) => {return [dato.nombre, parseInt(dato.ventas)]});
+  }
 
     function Graph() {
+        data = tabla.map((dato) => {return [dato.nombre, parseInt(dato.ventas)]});
+        data.unshift(["Element", "Ventas Totales Realizadas"]);
         return ( <Chart chartType="ColumnChart" width="100%" height="400px" data={data} /> );
     }
 
@@ -58,6 +71,7 @@ export default function Reporte7 () {
                 <TableRow>
                   <StyledTableCell>Nombre del Empleado</StyledTableCell>
                   <StyledTableCell align="right">Cantidad de Ventas Realizadas</StyledTableCell>
+                  <StyledTableCell align="right">Ciudad</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -66,7 +80,8 @@ export default function Reporte7 () {
                     <StyledTableCell component="th" scope="row">
                       {dato.nombre}
                     </StyledTableCell>
-                    <StyledTableCell align="right">{dato.ventas_realizadas}</StyledTableCell>
+                    <StyledTableCell align="right">{dato.ventas}</StyledTableCell>
+                    <StyledTableCell align="right">{dato.ciudad}</StyledTableCell>
                   </StyledTableRow>
                 ))}
               </TableBody>
@@ -89,8 +104,13 @@ export default function Reporte7 () {
                 <Button size="medium" variant="contained" onClick={() => navigate("/")} startIcon={<ArrowBackIcon />}> Regresar </Button>
             </div>
 
-            <div className='api'>
+            {tabla.length > 0 && <div className='api'>
                 <Graph></Graph>
+            </div>}
+
+            <div className='entrada'>
+                <input type="text" value={ciudad} onChange={e => validacion(e)} placeholder='Ingresa la ciudad'/>
+                <button onClick={() => enviar()}>Enviar</button>
             </div>
 
             <div className='table' style={{width: '100%'}}>

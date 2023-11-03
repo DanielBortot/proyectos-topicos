@@ -14,6 +14,7 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { DatosRep2 } from '../../types/datosRep2';
+import axios from 'axios';
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -37,8 +38,8 @@ export default function Reporte2 () {
 
     useEffect(() => {
         (async () => {
-            //const res: DatosRep2[] = await (await axios.get('')).data;
-            //setTabla(res);
+            const res: DatosRep2[] = await (await axios.get('/reportes/reporte2')).data;
+            setTabla(res);
         })();
       },[]);
 
@@ -50,7 +51,7 @@ export default function Reporte2 () {
                 <TableRow>
                   <StyledTableCell>Distribuidora</StyledTableCell>
                   <StyledTableCell align="right">Producto</StyledTableCell>
-                  <StyledTableCell align="right">Fecha</StyledTableCell>
+                  <StyledTableCell align="right">Fecha (aaaa/mm/dd)</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -60,7 +61,7 @@ export default function Reporte2 () {
                       {dato.distribuidor}
                     </StyledTableCell>
                     <StyledTableCell align="right">{dato.producto}</StyledTableCell>
-                    <StyledTableCell align="right">{dato.fecha_inventario}</StyledTableCell>
+                    <StyledTableCell align="right">{dato.fecha_inventario.slice(0, 10)}</StyledTableCell>
                   </StyledTableRow>
                 ))}
               </TableBody>
