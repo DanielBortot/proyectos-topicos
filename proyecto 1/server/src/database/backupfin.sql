@@ -385,9 +385,9 @@ CREATE FUNCTION public.reporte7(ciu character varying) RETURNS TABLE(idempleado 
 				ciu.nombre ciudad
 				from "Venta" v
 				inner join "Empleado" e on e."id" = v."asistenciaEmpleadoId"
-				inner join (select distinct s."empleadoId", s."ciudadId" from "Hist_Salarios" s) sa ON e."id" = sa."empleadoId"
+				inner join (select distinct s."empleadoId", s."ciudadId", s."fechaFin" from "Hist_Salarios" s) sa ON e."id" = sa."empleadoId"
 				inner join "Ciudad" ciu ON sa."ciudadId"=ciu."id"
-				where lower (ciu."nombre") like lower($1)
+				where lower (ciu."nombre") like lower($1) and sa."fechaFin" is null
 				group by v."asistenciaEmpleadoId", (e.datos_empleado), ciu.nombre
 				order by ventas desc
 		);

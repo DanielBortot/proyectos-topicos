@@ -54,12 +54,22 @@ export default function Reporte7 () {
     async function enviar () {
       const res: DatosRep7[] = await (await axios.post('/reportes/reporte7', {ciudad})).data;
       setTabla(res)
-      data = res.map((dato) => {return [dato.nombre_completo, parseInt(dato.ventas)]});
+      data = res.map((dato, index) => {
+        let color = '';
+        if (index % 2) color = '#rgb(66, 188, 249)'
+        else color = 'rgb(157, 203, 223)';
+        return [dato.nombre_completo, parseInt(dato.ventas), color]
+      });
   }
 
     function Graph() {
-        data = tabla.map((dato) => {return [dato.nombre_completo, parseInt(dato.ventas)]});
-        data.unshift(["Element", "Ventas Totales Realizadas"]);
+      data = tabla.map((dato, index) => {
+        let color = '';
+        if (index % 2) color = '#rgb(66, 188, 249)'
+        else color = 'rgb(157, 203, 223)';
+        return [dato.nombre_completo, parseInt(dato.ventas), color]
+      });
+        data.unshift(["Element", "Ventas Totales Realizadas", { role: "style" }]);
         return ( <Chart chartType="ColumnChart" width="100%" height="400px" data={data} /> );
     }
 
